@@ -1,4 +1,4 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+type Shape = 'Triangle' | 'Circle' | 'Rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,31 +8,30 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape: Shape = 'Triangle';
 
   public color: Color;
 
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side length should be greater than 0');
+      throw new Error('Each side length must be greater than 0');
     }
 
     const longest = Math.max(a, b, c);
     const sumOthers = a + b + c - longest;
 
     if (longest >= sumOthers) {
-      throw new Error(`Sides ${a}, ${b} and ${c} doesn't form a triangle`);
+      throw new Error(
+        `Invalid triangle sides: ${a}, ${b} and ${c} do not satisfy the triangle inequality`,
+      );
     }
+
     this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   public getArea(): number {
@@ -44,43 +43,41 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = 'Circle';
 
   public color: Color;
 
-  private radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
     this.color = color;
-    this.radius = radius;
   }
 
   public getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius ** 2;
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape: Shape = 'Rectangle';
 
   public color: Color;
 
-  private width: number;
-
-  private height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('Width and height must be bigger than 0');
     }
     this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   public getArea(): number {
@@ -91,5 +88,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape.toLowerCase()} - ${figure.getArea()}`;
 }
