@@ -1,4 +1,4 @@
-type Shape = 'Triangle' | 'Circle' | 'Rectangle';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'Triangle';
+  public shape: Shape = 'triangle';
 
   public color: Color;
 
@@ -43,7 +43,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'Circle';
+  public shape: Shape = 'circle';
 
   public color: Color;
 
@@ -65,7 +65,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'Rectangle';
+  public shape: Shape = 'rectangle';
 
   public color: Color;
 
